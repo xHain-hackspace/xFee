@@ -1,0 +1,302 @@
+/* @package xfee */
+
+/* ###### DARK MODE ADMIN ##### */
+
+body,
+.menu-item-handle,
+.widget .widget-top,
+input[type='color'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='datetime'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+select,
+textarea,
+.bulk-select-button,
+#screen-meta,
+#major-publishing-actions,
+#screen-meta-links .show-settings {
+  background-color: var(--bgc);
+  color: var(--white);
+  &::placeholder {
+    color: var(--black);
+    filter: blur(1px);
+    opacity: 0.6;
+  }
+}
+
+.bulk-select-button {
+  background-color: var(--bgc);
+  color: var(--white);
+  border-color: var(--grey);
+}
+
+code {
+  background-color: var(--bgc);
+}
+
+.menu-item-bar .menu-item-handle,
+#nav-menu-header,
+#menu-management .menu-edit,
+#menu-settings-column .accordion-container,
+.comment-ays,
+.feature-filter,
+.manage-menus,
+.menu-item-handle,
+.popular-tags,
+.stuffbox,
+.widget-inside,
+.widget-top,
+.widgets-holder-wrap,
+.wp-editor-container,
+p.popular-tags,
+table.widefat,
+.menu-settings,
+.accordion-section {
+  border-color: var(--grey);
+}
+
+#adminmenu,
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu .wp-has-current-submenu .wp-submenu,
+#adminmenu .wp-has-current-submenu.opensub .wp-submenu,
+#adminmenu .wp-submenu,
+#adminmenu a.wp-has-current-submenu:focus + .wp-submenu,
+.notice-warning,
+.health-check-header,
+.privacy-settings-header {
+  background-color: var(--fgc);
+}
+
+/* ###### COLOR GREEN ##### */
+
+a,
+.wp-core-ui .button-link,
+.wp-core-ui .button.button-link,
+div.error a,
+div.notice a,
+div.updated a {
+  color: var(--green);
+}
+
+/* ###### COLOR WHITE ##### */
+
+a:active,
+a:focus,
+a:hover,
+.wp-core-ui .button-link:active,
+.wp-core-ui .button-link:hover,
+.wp-core-ui .button.button-link:active,
+.wp-core-ui .button.button-link:hover,
+.form-table td .notice p,
+.notice p,
+.notice-title,
+div.error p,
+div.updated p,
+.form-table th,
+.form-wrap label {
+  color: var(--white);
+}
+
+#adminmenu li.current a.menu-top,
+#adminmenu li.wp-has-current-submenu .wp-submenu .wp-submenu-head,
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+.folded #adminmenu li.current.menu-top,
+#adminmenu a:hover,
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub > a.menu-top,
+#adminmenu li > a.menu-top:focus,
+#adminmenu .awaiting-mod,
+#adminmenu .menu-counter,
+#adminmenu .update-plugins,
+.wp-core-ui .button-primary,
+.categorydiv div.tabs-panel,
+.customlinkdiv div.tabs-panel,
+.posttypediv div.tabs-panel,
+.taxonomydiv div.tabs-panel,
+.wp-tab-panel,
+.wp-tab-active,
+ul.add-menu-item-tabs li.tabs,
+ul.category-tabs li.tabs {
+  background-color: var(--green);
+  color: black;
+}
+
+input[type='color'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='datetime'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+select,
+.wp-core-ui select {
+  border-color: var(--bgc);
+  color: var(--white);
+  background-color: var(--grey);
+}
+
+input[type='color']:focus,
+input[type='date']:focus,
+input[type='datetime-local']:focus,
+input[type='datetime']:focus,
+input[type='email']:focus,
+input[type='month']:focus,
+input[type='number']:focus,
+input[type='password']:focus,
+input[type='search']:focus,
+input[type='tel']:focus,
+input[type='text']:focus,
+input[type='time']:focus,
+input[type='url']:focus,
+input[type='week']:focus,
+select:focus {
+  /* border-color: var(--green); */
+  color: var(--black);
+  background-color: var(--grey);
+}
+
+textarea:focus,
+.nav-tab:focus {
+  background-color: var(--grey);
+}
+
+.nav-tab:hover,
+.wp-core-ui .button-primary:hover {
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.wp-core-ui .button:where(:not(.button-link)),
+.wrap .page-title-action,
+.wrap .page-title-action:hover,
+.about-wrap .nav-tab-active,
+.nav-tab {
+  border-color: var(--green);
+  color: var(--white);
+  background-color: var(--fgc);
+}
+
+.wp-core-ui .button:where(:not(.button-link)):hover {
+  background-color: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+}
+
+.nav-tab-active:hover,
+.nav-tab-active {
+  background-color: var(--green);
+}
+
+.notice-success,
+div.updated {
+  border-left-color: var(--green);
+  background-color: var(--fgc);
+}
+
+.wp-core-ui select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 var(--green, 1.5px) var(--green);
+}
+
+.plugin-update-tr.active td,
+.plugins .active td.check-column,
+.plugins .active th.check-column {
+  border-color: var(--green);
+}
+
+#wpbody-content h1 {
+  color: var(--white);
+  margin-bottom: 3rem;
+}
+
+.postbox,
+table.widefat,
+.manage-menus {
+  background: var(--bgc);
+}
+
+.plugins tr,
+#nav-menu-footer,
+#nav-menu-header,
+.nav-menus-php #post-body,
+.accordion-section-content,
+.control-section .accordion-section-title,
+.customize-pane-child .accordion-section-title {
+  background: var(--fgc);
+}
+
+.js .control-section .accordion-section-title:focus,
+.js .control-section .accordion-section-title:hover,
+.js .control-section.open .accordion-section-title,
+.js .control-section:hover .accordion-section-title,
+.categorydiv div.tabs-panel,
+.customlinkdiv div.tabs-panel,
+.posttypediv div.tabs-panel,
+.taxonomydiv div.tabs-panel,
+.wp-tab-panel {
+  background: var(--fgc);
+}
+.accordion-section-title button.accordion-trigger,
+.nav-menus-php .metabox-holder .accordion-section-title button.accordion-trigger {
+  color: var(--white);
+}
+
+.striped > tbody > :nth-child(odd) {
+  background-color: var(--fgc_light);
+}
+
+h2,
+h3,
+.widefat td,
+.widefat th,
+.widefat thead tr th {
+  color: var(--white);
+}
+
+/* ###### BUTTONS ##### */
+
+/* ###### CHECK BOX & CO ##### */
+
+input[type='radio'],
+input[type='checkbox'] {
+  background: var(--bgc);
+  border-color: var(--grey);
+}
+
+input[type='radio']:checked,
+input[type='checkbox']:checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+input[type='checkbox']:focus,
+input[type='radio']:focus {
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--green);
+}
+
+/* ###### WEIRD ##### */
+
+#post-body-content,
+.edit-form-section {
+  margin-bottom: 0;
+}
