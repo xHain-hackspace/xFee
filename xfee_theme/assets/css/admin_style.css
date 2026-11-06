@@ -26,6 +26,7 @@ code {
   }
 }
 
+#wp-admin-bar-root-default,
 #minor-publishing-actions {
   display: none;
 }

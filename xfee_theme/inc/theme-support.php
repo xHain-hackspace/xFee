@@ -55,6 +55,21 @@ function xfee_redirect_wp_login() {
 }
 
 /**
+ * Adds default favicon
+ *
+ * @author Richard Lemke <richard@mrhide.de>
+ * @since 0.9.1
+ */
+add_action('wp_head', 'xfee_add_favicon');
+add_action('admin_head', 'xfee_add_favicon');
+function xfee_add_favicon() {
+  if (has_site_icon()) return;
+  echo '<link rel="icon" type="image/svg+xml" href="' . get_template_directory_uri() . '/assets/img/favicon.svg">';
+  echo '<link rel="icon" type="image/png" sizes="32x32" href="' . get_template_directory_uri() . '/assets/img/favicon-32.png">';
+  echo '<link rel="apple-touch-icon" sizes="180x180" href="' . get_template_directory_uri() . '/assets/img/apple-touch-icon.png">';
+}
+
+/**
  * Creates the required pages, if they don't exist
  *
  * @return integer Stock count
