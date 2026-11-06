@@ -738,8 +738,8 @@ button[data-detail-id] {
     padding: 0.5rem 1rem;
     border-radius: 0.6rem;
     background-color: var(--fgc);
-    margin: 0 12%;
-    max-width: 300px;
+    /* margin: 0 12%;
+    max-width: 300px; */
 
     #loginform p {
       display: grid;

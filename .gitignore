@@ -9,6 +9,7 @@
 .env
 .env.*
 !.env.example
+!.env.prod.example
 
 # Logs
 *.log
@@ -27,3 +28,6 @@ logs/
 # Local backups
 *.bak
 *.old
+
+# Parsedown, loaded by script
+/xfee_theme/libs/parsedown/

@@ -36,10 +36,10 @@ get_header(); ?>
       <span><?php echo $count; ?></span><span class="acorn_icon"></span>
     </div>
     <h2>Your current shifts</h2>
-    <?php
-    if (count($user_shifts) > 0) {
-    ?>
-      <div class="user_shift_table">
+    <div class="user_shift_table">
+      <?php
+      if (count($user_shifts) > 0) {
+      ?>
         <?php
         $counter = 0;
         foreach ($user_shifts as $key => $shift) {
@@ -68,15 +68,17 @@ get_header(); ?>
         <?php
         }
         if ($counter === 0) {
-        ?>
-          <span>You have no shifts.</span>
-        <?php
         }
+        echo $counter;
         ?>
-      </div>
-    <?php
-    }
-    ?>
+      <?php
+      } else {
+      ?>
+        <span>You have no shifts</span>
+      <?php
+      }
+      ?>
+    </div>
 
     <?php
     $pick_ups = get_user_pick_ups($user->ID);
@@ -95,7 +97,7 @@ get_header(); ?>
         }
       } else {
         ?>
-        <span>You have no pick-ups.</span>
+        <span>You have no pick-ups</span>
       <?php
       }
       ?>

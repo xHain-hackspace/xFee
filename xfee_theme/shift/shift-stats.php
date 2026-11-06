@@ -75,6 +75,7 @@ function update_shift_stats() {
  */
 function get_shift_stats() {
   $stats       = get_option('shift_stats', []);
+  if (count($stats) === 0) return '';
   $shift_stats = '<div id="site_stats">';
   if ($stats['open'] > 0) {
     $shift_stats  .= '<span class="open" value="' . $stats['open'] . '"></span>';

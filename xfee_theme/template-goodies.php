@@ -33,21 +33,26 @@ $user_id = get_current_user_id();
     echo '<div id="form_warning" data-success="' . $success . '">' . $feedback . '</div>';
   }
 
+  if (count($goodies) > 0) {
+    foreach ($goodies as $key => $goodie) { ?>
 
-  foreach ($goodies as $key => $goodie) { ?>
+      <h2><?php echo $goodie['name']; ?><?php echo get_editor_link($goodie['id']); ?></h2>
 
-    <h2><?php echo $goodie['name']; ?><?php echo get_editor_link($goodie['id']); ?></h2>
+      <div class="img_wrap"><?php echo $goodie['image']; ?></div>
 
-    <div class="img_wrap"><?php echo $goodie['image']; ?></div>
+      <?php echo get_order_form($goodie['id'], $goodie['name'], $goodie['options'], $user_id, $goodie['compensation'], $goodie['in_stock']); ?>
 
-    <?php echo get_order_form($goodie['id'], $goodie['name'], $goodie['options'], $user_id, $goodie['compensation'], $goodie['in_stock']); ?>
+      <button data-detail-id="<?php echo $key; ?>">Details</button>
 
-    <button data-detail-id="<?php echo $key; ?>">Details</button>
+      <div data-detail-id="<?php echo $key; ?>" class="details">
+        <div><?php echo $goodie['details']; ?></div>
+      </div>
 
-    <div data-detail-id="<?php echo $key; ?>" class="details">
-      <div><?php echo $goodie['details']; ?></div>
-    </div>
-
+    <?php
+    }
+  } else {
+    ?>
+    <span>No goodies available</span>
   <?php
   }
   ?>
