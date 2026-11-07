@@ -13,8 +13,6 @@
  * Get a list with all goodies
  *
  * @return array
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_all_goodies() {
@@ -48,10 +46,7 @@ function get_all_goodies() {
  * Returns goodie fields
  *
  * @param integer $goodie_id
- *
  * @return array All goodies
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_goodie_fields($goodie_id) {
@@ -65,10 +60,7 @@ function get_goodie_fields($goodie_id) {
  *
  * @param integer $goodie_id
  * @param array $goodie_fields
- *
  * @return array All goodies
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function update_goodie_fields($goodie_id, $goodie_fields) {
@@ -81,10 +73,7 @@ function update_goodie_fields($goodie_id, $goodie_fields) {
  * Sums the stock count
  *
  * @param array $options
- *
  * @return integer Stock count
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_stock_count($options) {
@@ -99,10 +88,7 @@ function get_stock_count($options) {
  * Returns the goodie stats
  *
  * @param array $all_goodies
- *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_goodie_stats($all_goodies) {
@@ -137,8 +123,6 @@ function get_goodie_stats($all_goodies) {
  * Returns a list of all stock figures
  *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_stock_stats() {
@@ -166,10 +150,7 @@ function get_stock_stats() {
  * Handles user picking a goodie
  *
  * @param array $args
- *
  * @return string Feedback, warnings
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function handle_user_pick(array $args) {
@@ -244,8 +225,6 @@ function handle_user_pick(array $args) {
  * Handles user canceling a pick
  *
  * @param integer $code
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function handle_user_cancel($code) {
@@ -288,10 +267,7 @@ function handle_user_cancel($code) {
  * Parses markdown to HTML, levels down headlines
  *
  * @param string $markdown
- *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_html_from_markdown($markdown) {

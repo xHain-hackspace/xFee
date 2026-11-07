@@ -14,10 +14,7 @@
  * Registers shift meta box
  *
  * @param WP_Post $post
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('admin_menu', 'shift_add_metabox');
@@ -36,10 +33,7 @@ function shift_add_metabox() {
  * Prints shift meta box
  *
  * @param WP_Post $post
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function shift_meta_box_form($post) {
@@ -115,10 +109,7 @@ function shift_meta_box_form($post) {
  *
  * @param integer $shift_id  Wordpress object
  * @param WP_Post $post
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('save_post', 'shift_save_meta', 10, 2);
@@ -188,10 +179,7 @@ function shift_save_meta($shift_id, $post) {
  * Only used in shift_meta_box_form()
  *
  * @param integer $shift_id
- *
  * @return array Shift fields
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_shift_meta($shift_id) {

@@ -16,8 +16,6 @@
  * Returns an array with THE shift row template
  *
  * @return array Template parts, [0] => label & hidden, [1] => user select, [2] => remove button
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_occurrence_row_template() {
@@ -39,11 +37,8 @@ function get_occurrence_row_template() {
  * @param string $weekday
  * @param string $signature
  * @param integer $selected_user_id
- * @param string $status Options: pre_process, queue_process, begin_process, end_process, post_process or done
- *
+ * @param boolean $done
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function fill_occurrence_row_template($template, $date, $weekday, $signature, $selected_user_id, $done = false) {
@@ -68,10 +63,7 @@ function fill_occurrence_row_template($template, $date, $weekday, $signature, $s
  * @param string $status Options: pre_process, queue_process, begin_process, end_process, post_process or done
  * @param integer $shift_date
  * @param integer $selected_user_id
- *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_user_select_list($status, $shift_date = 0, $selected_user_id = 0) {

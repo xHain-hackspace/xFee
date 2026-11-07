@@ -20,7 +20,6 @@ add_filter('auth_cookie_expiration', 'keep_me_logged_in_for_1_year');
 /**
  * Protects pages from logged out users
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('template_redirect', 'protect_internal_pages');
@@ -42,7 +41,6 @@ function protect_internal_pages() {
 /**
  * Redirects wordpress admin login page
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('init', 'xfee_redirect_wp_login');
@@ -57,7 +55,6 @@ function xfee_redirect_wp_login() {
 /**
  * Adds default favicon
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.1
  */
 add_action('wp_head', 'xfee_add_favicon');
@@ -74,7 +71,6 @@ function xfee_add_favicon() {
  *
  * @return integer Stock count
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('after_switch_theme', 'xfee_check_required_pages');

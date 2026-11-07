@@ -12,7 +12,6 @@
 /**
  * Enqueues all frontend css
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function main_load_scripts() {

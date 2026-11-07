@@ -5,18 +5,15 @@
  *
  * @package    xfee_theme
  * @author     Richard Lemke
- * @license    GPL-3.0 or later
  * @link       https://mrhide.de
+ * @license    GPL-3.0 or later
  */
 
 /**
  * Adds an pick-ups page to backend
  *
  * @uses list.php
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 
@@ -34,8 +31,6 @@ function pick_up_list() {
  * Returns undo pick-ups
  *
  * @return array
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_pick_up_trash() {
@@ -48,10 +43,7 @@ function get_pick_up_trash() {
  * Updates undo pick-ups
  *
  * @param array $restore_pick_ups
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function update_pick_up_trash($restore_pick_ups) {
@@ -63,8 +55,6 @@ function update_pick_up_trash($restore_pick_ups) {
  * Returns all pick-ups
  *
  * @return array
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function  get_all_pick_ups() {
@@ -85,10 +75,7 @@ function  get_all_pick_ups() {
  *
  * @param integer $user_id
  * @param integer $code Pick-up code
- *
  * @return boolean
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function check_for_pick_up($user_id, $code) {
@@ -108,8 +95,6 @@ function check_for_pick_up($user_id, $code) {
  *
  * @param integer $user_id
  * @param integer $code Pick-up code
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function confirm_pick_up($user_id, $code) {
@@ -162,7 +147,6 @@ function confirm_pick_up($user_id, $code) {
 /**
  * Cancels the current pick-up
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function cancel_current_pick_up() {
@@ -177,7 +161,6 @@ function cancel_current_pick_up() {
 /**
  * Restores the last get pick-up
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function restore_last_pick_up() {
@@ -195,8 +178,8 @@ function restore_last_pick_up() {
   update_user_pick_ups($user_id, $user_pick_ups);
 
   // Restore to goodie
-  $goodie_id      = $restore_pick_ups[$current_user_id]['goodie_id'];
-  $goodie_fields  = get_goodie_fields($goodie_id);
+  $goodie_id        = $restore_pick_ups[$current_user_id]['goodie_id'];
+  $goodie_fields    = get_goodie_fields($goodie_id);
   $goodie_fields['pick_ups'][]  = $restore_pick_ups[$current_user_id]['goodie'];
   update_goodie_fields($goodie_id, $goodie_fields);
 

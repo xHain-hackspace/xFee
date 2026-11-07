@@ -14,10 +14,7 @@
  * For: Adding and removing acorns, removing pick-ups
  *
  * @param string $action
- *
  * @return string One form
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_pick_up_action_form($action) {
@@ -84,8 +81,6 @@ function get_pick_up_action_form($action) {
  * Handles pick-up actions
  *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('admin_post_handle_pick_up_action', 'handle_pick_up_action'); // Only for login users

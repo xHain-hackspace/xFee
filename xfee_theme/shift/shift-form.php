@@ -15,10 +15,7 @@
  * For: Adding and removing acorns, removing pick-ups
  *
  * @param array $args
- *
  * @return string One form
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_shift_action_form(array $args) {
@@ -128,17 +125,13 @@ function get_shift_action_form(array $args) {
  * Handles shift actions
  *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 
 add_action('wp_ajax_handle_shift_action', 'handle_shift_action');
 add_action('wp_ajax_nopriv_handle_shift_action', 'handle_shift_action');
 
-// add_action('admin_post_handle_shift_action', 'handle_shift_action'); // Only for login users
 function handle_shift_action() {
-  error_log('######### handle_shift_action');
   if (!is_user_logged_in()) {
     wp_send_json_error([
       'message' => 'You are not logged in.'
@@ -161,8 +154,6 @@ function handle_shift_action() {
     }
   }
 
-  error_log('######### Fehlendes Feld');
-
   $action = sanitize_text_field(wp_unslash($_POST['shift_booking_action']));
   if (!in_array($action, ['sign-up', 'cancel', 'finish', 'done'], true)) {
     return;
@@ -176,7 +167,6 @@ function handle_shift_action() {
   )) {
     wp_die('Invalid request.');
   }
-  error_log('######### wp_verify_nonce');
   $shift_id     = absint($_POST['shift_id']);
   $shift_date   = sanitize_text_field(wp_unslash($_POST['shift_date']));
   $compensation = sanitize_text_field(wp_unslash($_POST['compensation']));
@@ -190,25 +180,23 @@ function handle_shift_action() {
   ) {
     wp_die('Couldn\'t find shift.');
   }
-  error_log('######### $shift_id');
 
   $fields = get_post_meta($shift_id, 'shift_fields', true);
   // Check for occurrences
   if (!is_array($fields['dates']) || !array_key_exists($shift_date, $fields['dates'])) {
-    error_log('EEEEEEEEE Couldn\'t find shift occurrence. $shift_date: ' . $shift_date);
+    error_log('xFee-Theme: Couldn\'t find shift occurrence. $shift_date: ' . $shift_date);
   }
   // Compare to date
   if ($fields['dates'][$shift_date]['date'] !== $shift_date) {
-    error_log('EEEEEEEEE Couldn\'t find shift occurrence. (date match error)');
+    error_log('xFee-Theme: Couldn\'t find shift occurrence. (date match error)');
   }
 
   // Compare to signature
   if ($fields['dates'][$shift_date]['signature'] !== $signature) {
-    error_log('EEEEEEEEE Couldn\'t find shift occurrence. (signature match error: ' . $fields['dates'][$shift_date]['signature'] . ' != ' . $signature . ')');
+    error_log('xFee-Theme: Couldn\'t find shift occurrence. (signature match error: ' . $fields['dates'][$shift_date]['signature'] . ' != ' . $signature . ')');
   }
 
   $user_id = get_current_user_id();
-  error_log('######### $user_id');
   $next_action = '';
 
   switch ($action) {
@@ -241,11 +229,7 @@ function handle_shift_action() {
 
   update_post_meta($shift_id, 'shift_fields', $fields);
   update_shift_stats();
-  error_log('######### durch');
 
-  // $redirect_url = wp_get_referer();
-  // wp_safe_redirect($redirect_url);
-  // exit;
   wp_send_json_success([
     'message' => 'Vielen Dank! Deine Anfrage wurde übermittelt.',
     'next_action' => $next_action

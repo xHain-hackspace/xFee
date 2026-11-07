@@ -13,10 +13,7 @@
  * Registers goodie meta box
  *
  * @param WP_Post $post
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('admin_menu', 'goodie_add_metabox');
@@ -35,10 +32,7 @@ function goodie_add_metabox() {
  * Prints goodie meta box
  *
  * @param WP_Post $post
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function goodie_meta_box_form($post) {
@@ -79,10 +73,7 @@ function goodie_meta_box_form($post) {
  *
  * @param integer $post_id
  * @param WP_Post $post
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('save_post', 'goodie_save_meta', 10, 2);
@@ -117,10 +108,7 @@ function goodie_save_meta($post_id, $post) {
  * Only used in goodie_meta_box_form()
  *
  * @param integer $goodie_id
- *
  * @return array Goodie fields
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_goodie_meta($goodie_id) {

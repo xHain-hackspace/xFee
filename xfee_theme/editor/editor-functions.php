@@ -13,10 +13,7 @@
  * Returns edit link for shifts and goodies
  *
  * @param integer $post_id
- *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_editor_link($post_id) {

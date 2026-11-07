@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Admin class
+ *
+ * @package    xfee_theme
+ * @author     Richard Lemke
+ * @link       https://mrhide.de
+ * @license    GPL-3.0 or later
+ */
+
 class xFee_Admin {
 
   /**

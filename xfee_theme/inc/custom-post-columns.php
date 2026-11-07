@@ -24,9 +24,9 @@ if (is_admin() && 'edit.php' == $pagenow) {
 /**
  * Adds custom columns to admin columns
  *
- * @since 0.9.0
- *
+ * @param array $columns
  * @return array
+ * @since 0.9.0
  */
 function manage_shift_columns($columns) {
   $date = $columns['author'];
@@ -42,9 +42,10 @@ function manage_shift_columns($columns) {
 /**
  * Populates custom admin columns
  *
- * @since 0.9.0
- *
+ * @param array $column
+ * @param integer $post_id
  * @return array
+ * @since 0.9.0
  */
 function populate_shift_columns($column, $post_id) {
   switch ($column) {
@@ -64,9 +65,9 @@ function populate_shift_columns($column, $post_id) {
 /**
  * Adds custom columns to admin columns
  *
- * @since 0.9.0
- *
+ * @param array $column
  * @return array
+ * @since 0.9.0
  */
 function manage_goodie_columns($columns) {
   $date = $columns['author'];
@@ -81,9 +82,10 @@ function manage_goodie_columns($columns) {
 /**
  * Populates custom admin columns
  *
- * @since 0.9.0
- *
+ * @param array $column
+ * @param integer $post_id
  * @return array
+ * @since 0.9.0
  */
 function populate_goodie_columns($column, $post_id) {
   switch ($column) {

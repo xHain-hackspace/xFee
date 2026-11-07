@@ -5,8 +5,8 @@
  *
  * @package    xfee_theme
  * @author     Richard Lemke
- * @license    GPL-3.0 or later
  * @link       https://mrhide.de
+ * @license    GPL-3.0 or later
  */
 
 // Hide admin bar
@@ -20,27 +20,16 @@ add_filter('show_admin_bar', '__return_false');
  * @param string $shift_date from $_POST['shift_date']
  * @param integer $compensation from $_POST['compensation']
  * @param string $signature from $_POST['signature']
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('admin_menu', 'wpdocs_remove_menus');
 function wpdocs_remove_menus() {
-  // remove_menu_page('index.php');               //Dashboard
   remove_menu_page('edit.php');                   //Posts
   remove_menu_page('upload.php');                 //Media
-  // remove_menu_page('edit.php?post_type=page'); //Pages
   remove_menu_page('edit-comments.php');          //Comments
-  // remove_menu_page('themes.php');              //Appearance
   remove_menu_page('plugins.php');                //Plugins
-  // remove_menu_page('users.php');               //Users
-  // remove_menu_page('tools.php');               //Tools
-  // remove_menu_page('options-general.php');     //Settings
 }
-
-
 
 
 /*

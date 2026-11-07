@@ -40,7 +40,7 @@ Install the theme on a clean WordPress. Upon activation xFee creates all the nec
 - Refactor JS (Mayve move to modules, like countdown to shift)
 - Shrink WP (Remove media-upload, plugins, ...)
 - Dockerfication (Clean WP, parsedown, xFee-Theme)
-- Limit user shift sign-ups
+- Limit user shift sign-ups (use global max shift option)
 - Cancel goodie option
 - Allow admins to finish a shift
 

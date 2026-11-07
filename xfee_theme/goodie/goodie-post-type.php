@@ -13,8 +13,6 @@
  * Register goodie post type
  *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('init', 'post_type_goodie');

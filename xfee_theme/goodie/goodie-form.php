@@ -19,10 +19,7 @@
  * @param integer $user_id
  * @param integer $compensation
  * @param integer $in_stock
- *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_order_form($goodie_id, $goodie_name, $goodie_options, $user_id, $compensation, $in_stock) {
@@ -90,10 +87,7 @@ function get_order_form($goodie_id, $goodie_name, $goodie_options, $user_id, $co
  * @param string $goodie_option from $_POST['goodie_option']
  * @param integer $compensation from $_POST['compensation']
  * @param integer $user_id from $_POST['user_id']
- *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('admin_post_handle_goodie_pick', 'handle_goodie_pick'); // Only for login users
@@ -186,10 +180,7 @@ function handle_goodie_pick() {
  * Gets goodie form for cancel
  *
  * @param integer $code
- *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_cancel_order_form($code) {

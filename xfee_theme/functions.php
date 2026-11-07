@@ -27,10 +27,13 @@ date_default_timezone_set('Europe/Berlin');
 $GLOBALS['xfee_config'] = [
 
     'debug' => false,
-    // Debug mode, not yet in use
+    // Debug mode, not yet in use !
 
     'max_acorn_per_shift' => 4,
     // Maximum how much to earn in one shift
+
+    'max_shift_per_user' => 0,
+    // Maximum amount of shifts a user can sign-up for, not yet in use !
 
     'shifts_for_weeks' => 6,
     // How many weeks long is the shift overview

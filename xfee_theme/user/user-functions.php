@@ -14,10 +14,7 @@
  *
  * @param integer $user_id
  * @param string $field
- *
  * @return mixed Chosen field // TODO: Check if mixed is correct
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_user_field($user_id, $field) {
@@ -29,10 +26,7 @@ function get_user_field($user_id, $field) {
  * Returns the amount of user acorns
  *
  * @param integer $user_id
- *
  * @return integer
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_user_acorn_count($user_id) {
@@ -44,10 +38,7 @@ function get_user_acorn_count($user_id) {
  * Returns user acorns
  *
  * @param integer $user_id
- *
  * @return array All acorn signatures
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_user_hoard($user_id) {
@@ -61,10 +52,7 @@ function get_user_hoard($user_id) {
  *
  * @param integer $user_id
  * @param array $user_hoard
- *
  * @return array All acorn signatures
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function update_user_hoard($user_id, $user_hoard) {
@@ -75,10 +63,7 @@ function update_user_hoard($user_id, $user_hoard) {
  * Returns user pick-up fields
  *
  * @param integer $user_id
- *
  * @return array All user pick-ups
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_user_pick_ups($user_id) {
@@ -92,10 +77,7 @@ function get_user_pick_ups($user_id) {
  *
  * @param integer $user_id
  * @param array $user_pick_ups
- *
  * @return array All user pick-ups
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function update_user_pick_ups($user_id, $user_pick_ups) {
@@ -107,10 +89,7 @@ function update_user_pick_ups($user_id, $user_pick_ups) {
  * Returns an array with all shifts, can be filtered by $user_id
  *
  * @param integer $user_id optional
- *
  * @return array All user shifts
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_user_shifts($user_id) {
@@ -175,10 +154,7 @@ function get_user_shifts($user_id) {
  *
  * @param integer $user_id
  * @param array $all_shifts
- *
  * @return bool
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function user_has_shifts($user_id, $all_shifts) {

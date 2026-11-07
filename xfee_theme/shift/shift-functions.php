@@ -13,10 +13,7 @@
  * Returns shift fields
  *
  * @param integer $shift_id
- *
  * @return array All shifts
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_shift_fields($shift_id) {
@@ -30,10 +27,7 @@ function get_shift_fields($shift_id) {
  *
  * @param integer $shift_id
  * @param array $shift_fields
- *
  * @return array All shifts
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function update_shift_fields($shift_id, $shift_fields) {
@@ -45,8 +39,6 @@ function update_shift_fields($shift_id, $shift_fields) {
  * Returns an array with all shifts, meaning all occurrences
  *
  * @return array Each item is an occurence of a shift.
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_all_shifts() {
@@ -64,7 +56,7 @@ function get_all_shifts() {
     $shift_fields = get_shift_fields($shift_id);
 
     foreach ($shift_fields['dates'] as $field) {
-      // Add status
+
       [$assigned, $status] = get_shift_status([
         'date'      => $field['date'],
         'assign_id' => $field['assign_id'] ?? 0,
@@ -72,8 +64,6 @@ function get_all_shifts() {
         'time_to'   => $shift_fields['time_to'],
         'done'      => $field['done'] ?? false,
       ]);
-      // $assigned = unassigned, assigned, booked
-      // $status = pre_process, queue_process, begin_process, in_process, end_process, post_process, done
 
       $all_shifts[] = [
         'id'           => $shift_id,
@@ -94,7 +84,7 @@ function get_all_shifts() {
   }
 
   if (count($all_shifts) > 0) {
-    // Sort by date
+
     uasort($all_shifts, function ($a, $b) {
       $result = strcmp($a['date'], $b['date']);
 
@@ -116,10 +106,7 @@ function get_all_shifts() {
  *
  * @param string $date
  * @param array $shifts
- *
  * @return array All found shift ids
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function find_shift_ids_for_date($date, $shifts) {
@@ -139,14 +126,11 @@ function find_shift_ids_for_date($date, $shifts) {
 /**
  * Returns shift status for assignment and status
  * Assignments to other users are hidden
- *
- * @param array $args
- *
- * @return array [$assigned, $status]
  * $assigned = unassigned, assigned, booked (current user is assigned)
  * $status = pre_process, queue_process, begin_process, in_process, end_process, post_process, done
  *
- * @author Richard Lemke <richard@mrhide.de>
+ * @param array $args
+ * @return array [$assigned, $status]
  * @since 0.9.0
  */
 function get_shift_status(array $args) {
@@ -211,10 +195,7 @@ function get_shift_status(array $args) {
  *
  * @param integer $shift_id
  * @param integer $date
- *
  * @return string
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_new_signature($shift_id, $date) {
@@ -228,12 +209,7 @@ function get_new_signature($shift_id, $date) {
  * @param integer $user_id
  * @param string $signature
  * @param integer $compensation
- *
  * @return bool
- * $assigned = unassigned, assigned, booked
- * $status = pre_process, queue_process, begin_process, in_process, end_process, post_process, done
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function compensate_shift($user_id, $signature, $compensation) {
@@ -265,10 +241,7 @@ function compensate_shift($user_id, $signature, $compensation) {
  * But only if set to done
  *
  * @param array $shifts  List with shifts
- *
  * @return array Filtered list
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function shift_remove_old_ones($shifts) {
@@ -290,10 +263,7 @@ function shift_remove_old_ones($shifts) {
  *
  * @param string $datetime Target date and time in "Y-m-d H:i" format
  * @param string $datetime_end End date and time
- *
  * @return string HTML countdown element or an error message
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function render_countdown($datetime, $datetime_end) {
@@ -307,7 +277,7 @@ function render_countdown($datetime, $datetime_end) {
     $datetime_end,
     wp_timezone()
   );
-  // Check whether the date is valid.
+
   $errors = DateTimeImmutable::getLastErrors();
   if (!$target || ($errors !== false && ($errors['warning_count'] > 0 || $errors['error_count'] > 0))) {
     error_log('Invalid date or time');

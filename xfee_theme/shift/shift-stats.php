@@ -13,8 +13,6 @@
  * Writes stats
  *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 add_action('save_post_shift', 'update_shift_stats', 20, 3);
@@ -69,8 +67,6 @@ function update_shift_stats() {
  * Returns the shift stats
  *
  * @return string HTML
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function get_shift_stats() {

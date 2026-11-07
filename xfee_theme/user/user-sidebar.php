@@ -13,8 +13,6 @@
  * Prints the sidebar on goodie template
  *
  * @return void
- *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 function print_user_sidebar() {
