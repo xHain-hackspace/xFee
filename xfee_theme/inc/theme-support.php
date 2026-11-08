@@ -39,14 +39,20 @@ function protect_internal_pages() {
 }
 
 /**
- * Redirects wordpress admin login page
+ * Redirect the default WordPress login page.
  *
  * @since 0.9.0
  */
 add_action('init', 'xfee_redirect_wp_login');
-function xfee_redirect_wp_login() {
+
+function xfee_redirect_wp_login(): void {
   global $pagenow;
-  if ($pagenow === 'wp-login.php' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+
+  if (
+    $pagenow === 'wp-login.php'
+    && $_SERVER['REQUEST_METHOD'] === 'GET'
+    && !isset($_GET['action'])
+  ) {
     wp_safe_redirect(home_url('/'));
     exit;
   }

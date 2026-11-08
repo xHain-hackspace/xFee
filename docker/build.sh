@@ -12,6 +12,18 @@ cd "$PROJECT_ROOT"
 echo "Installing theme dependencies..."
 ./docker/install-parsedown.sh
 
+# Install OpenID Connect dependencies
+echo "Installing OpenID Connect dependencies..."
+
+docker run --rm \
+    -v "$PROJECT_ROOT/authentik-integration:/app" \
+    -w /app \
+    composer:2 \
+    install \
+    --no-dev \
+    --prefer-dist \
+    --optimize-autoloader
+
 # Start the local development environment
 echo "Starting local Docker environment..."
 docker compose -f docker/compose.yaml up -d

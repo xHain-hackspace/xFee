@@ -31,3 +31,9 @@ logs/
 
 # Parsedown, loaded by script
 /xfee_theme/libs/parsedown/
+
+# Authentik
+/authentik-integration/config/settings.php
+/authentik-integration/vendor/
+/authentik-integration/mu-plugins/xfee-authentik/vendor/
+/authentik-integration/config/settings.test.php

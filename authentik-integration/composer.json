@@ -1,0 +1,20 @@
+{
+    "name": "xfee/authentik-integration",
+    "description": "Custom OpenID Connect integration for WordPress using Authentik.",
+    "type": "project",
+    "require": {
+        "php": "^8.3",
+        "jumbojett/openid-connect-php": "^1.0.2"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.0"
+        },
+        "vendor-dir": "mu-plugins/xfee-authentik/vendor",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

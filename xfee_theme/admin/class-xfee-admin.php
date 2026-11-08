@@ -46,12 +46,17 @@ class xFee_Admin {
 
     if (
       isset($GLOBALS['pagenow']) &&
-      in_array($GLOBALS['pagenow'], ['admin-post.php', 'admin-ajax.php'], true)
+      in_array(
+        $GLOBALS['pagenow'],
+        ['admin-post.php', 'admin-ajax.php', 'wp-login.php'],
+        true
+      )
     ) {
       return;
     }
 
     $user = wp_get_current_user();
+
     if (in_array('author', $user->roles, true)) {
       wp_safe_redirect(home_url('/shifts/'));
       exit;

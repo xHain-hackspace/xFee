@@ -75,3 +75,64 @@ add_action('init', function () {
     remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
   }
 });
+
+
+/**
+ * Disable media uploads for all WordPress roles.
+ *
+ * @return void
+ */
+add_action('init', 'xfee_disable_media_uploads', 1);
+function xfee_disable_media_uploads(): void {
+  foreach (wp_roles()->roles as $role_name => $role_data) {
+    $role = get_role($role_name);
+
+    if ($role && $role->has_cap('upload_files')) {
+      $role->remove_cap('upload_files');
+    }
+  }
+}
+
+/**
+ * Block direct access to the WordPress media upload endpoint.
+ *
+ * @return void
+ */
+add_action('admin_init', 'xfee_block_media_upload_endpoint');
+function xfee_block_media_upload_endpoint(): void {
+  if (
+    isset($GLOBALS['pagenow'])
+    && $GLOBALS['pagenow'] === 'async-upload.php'
+  ) {
+    wp_die(
+      'Media uploads are disabled.',
+      'Upload disabled',
+      ['response' => 403]
+    );
+  }
+}
+
+/**
+ * Disable media creation through the WordPress REST API.
+ *
+ * @param mixed           $result  The current REST API response.
+ * @param WP_REST_Server  $server  The REST API server.
+ * @param WP_REST_Request $request The REST API request.
+ * @return mixed|WP_Error
+ */
+function xfee_disable_rest_media_uploads($result, $server, $request) {
+  if (
+    $request->get_method() === 'POST'
+    && $request->get_route() === '/wp/v2/media'
+  ) {
+    return new WP_Error(
+      'xfee_media_uploads_disabled',
+      'Media uploads are disabled.',
+      ['status' => 403]
+    );
+  }
+
+  return $result;
+}
+
+add_filter('rest_pre_dispatch', 'xfee_disable_rest_media_uploads', 10, 3);  z

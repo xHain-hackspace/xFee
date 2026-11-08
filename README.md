@@ -20,6 +20,18 @@ With that code you can pick-up your goodie with the help of an admin.
 
 ## Installation
 
+Build docker:
+
+```
+./docker/build-prod.sh
+```
+
+Development:
+
+```
+./docker/build.sh
+```
+
 1. Install
 1. Activate
 1. Use
@@ -43,6 +55,8 @@ Install the theme on a clean WordPress. Upon activation xFee creates all the nec
 - Limit user shift sign-ups (use global max shift option)
 - Cancel goodie option
 - Allow admins to finish a shift
+- Access hardening
+- Editor shift overview, remove assignment select from single shift
 
 ## Data structure
 
