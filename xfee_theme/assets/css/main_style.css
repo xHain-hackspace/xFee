@@ -571,6 +571,21 @@ button[data-detail-id] {
       }
     }
 
+    &[data-status='done'] {
+      .sign_up {
+        grid-row: 1/3;
+      }
+      .acorn_sign {
+        color: var(--grey);
+        .acorn_icon {
+          background-image: url(../img/icon-acorn-grey.svg);
+        }
+      }
+      .countdown {
+        display: none;
+      }
+    }
+
     .sign_up {
       width: 100%;
       display: flex;
