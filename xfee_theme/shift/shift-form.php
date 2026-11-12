@@ -72,73 +72,6 @@ function get_shift_action_form(array $args) {
 
     <button class="done failed" data-condition="form_failed" aria-label="was not done" disabled></button>
 
-    <?php if ($args['assigned'] === 'booked') { ?>
-
-      <?php if ($args['status'] === 'pre_process' || $args['status'] === 'queue_process' || $args['status'] === 'begin_process') {
-        // TODO: Too many stati
-      ?>
-
-        <!-- <input type="hidden" name="shift_booking_action" value="cancel">
-        <button type="submit" data-value="cancel"></button> -->
-
-      <?php } else if ($args['status'] === 'end_process' || $args['status'] === 'post_process') { ?>
-
-        <!-- <input type="hidden" name="shift_booking_action" value="finish">
-        <button type="submit" data-value="finish"></button> -->
-
-      <?php } else if ($args['status'] === 'done') { ?>
-
-        <!-- <button class="done success"></button> -->
-
-      <?php } else { ?>
-
-        <!-- <button class="done">running</button> -->
-
-      <?php } ?>
-
-    <?php } else if ($args['assigned'] === 'assigned') { ?>
-
-      <?php if ($args['status'] === 'done') { ?>
-
-        <!-- <button class="done success">done</button> -->
-
-      <?php } else { ?>
-
-        <!-- <button class="done">assigned</button> -->
-
-      <?php } ?>
-
-    <?php } else if ($args['assigned'] === 'unassigned') { ?>
-
-      <?php if ($args['status'] === 'pre_process') { ?>
-
-        <!-- <input type="hidden" name="shift_booking_action" value="sign-up">
-        <button type="submit" data-value="sign-up"></button> -->
-
-      <?php } else if ($args['status'] === 'queue_process' || $args['status'] === 'begin_process') { ?>
-
-        <!-- <input type="hidden" name="shift_booking_action" value="sign-up">
-        <button type="submit" data-value="sign-up !!!"></button> -->
-
-      <?php } else { ?>
-
-        <!-- <button class="done failed">wasn't done</button> -->
-      <?php } ?>
-
-    <?php } else {
-      error_log('Shift-form error: $assigned does not match.');
-    } ?>
-
-    <?php
-    // if ($shifts[$key]['assigned'] != 'assigned') {
-    //   $like_now        = date('Y-m-d H:i');
-    //   $timestamp_begin = $shifts[$key]['date'] . ' ' . $shifts[$key]['time_from'];
-    //   $timestamp_end   = $shifts[$key]['date'] . ' ' . $shifts[$key]['time_to'];
-    //   if ($like_now <= $timestamp_end) {
-    //     echo render_countdown($timestamp_begin, $timestamp_end);
-    //   }
-    // }
-    ?>
   </form>
 
 <?php
@@ -206,30 +139,22 @@ function handle_shift_action() {
     || get_post_type($shift_id) !== 'shift'
     || get_post_status($shift_id) !== 'publish'
   ) {
-    wp_send_json_error([
-      'message' => 'Something went wrong, could not find a shift with the ID ' . $shift_id . '.'
-    ], 401);
+    wp_send_json_error(['message' => 'Something went wrong, could not find a shift with the ID ' . $shift_id . '.'], 401);
   }
 
   $fields = get_post_meta($shift_id, 'shift_fields', true);
   // Check for occurrences
   if (!is_array($fields['dates']) || !array_key_exists($shift_date, $fields['dates'])) {
-    wp_send_json_error([
-      'message' => 'Something went wrong, could not find a shift occurrence for ' . $shift_date . '.'
-    ], 401);
+    wp_send_json_error(['message' => 'Something went wrong, could not find a shift occurrence for ' . $shift_date . '.'], 401);
   }
   // Compare to date
   if ($fields['dates'][$shift_date]['date'] !== $shift_date) {
-    wp_send_json_error([
-      'message' => 'Something went wrong, could not find a shift occurrence for ' . $shift_date . '.'
-    ], 401);
+    wp_send_json_error(['message' => 'Something went wrong, could not find a shift occurrence for ' . $shift_date . '.'], 401);
   }
 
   // Compare to signature
   if ($fields['dates'][$shift_date]['signature'] !== $signature) {
-    wp_send_json_error([
-      'message' => 'Something went wrong, the signatures did not match.'
-    ], 401);
+    wp_send_json_error(['message' => 'Something went wrong, the signatures did not match.'], 401);
   }
 
   $user_id = get_current_user_id();
@@ -238,21 +163,23 @@ function handle_shift_action() {
   switch ($action) {
     case 'sign-up':
       if ($fields['dates'][$shift_date]['assign_id'] === 0) {
-        $fields['dates'][$shift_date]['assign_id'] = $user_id;
-        update_shift_stats();
-        $next_action = 'cancel';
-        $success_msg = 'You have signed a shift.';
+        if (!user_has_shifts_left($user_id)) {
+          wp_send_json_error(['message' => 'Your shift maximum is reached, finish a shift before you sign-up for a new one.'], 401);
+        } else {
+          $fields['dates'][$shift_date]['assign_id'] = $user_id;
+          update_shift_stats($user_id);
+          $next_action = 'cancel';
+          $success_msg = 'You have signed a shift.';
+        }
       } else {
-        wp_send_json_error([
-          'message' => 'Shift is already assigned, you were probably a bit too slow, better luck next time.'
-        ], 401);
+        wp_send_json_error(['message' => 'Shift is already assigned, you were probably a bit too slow, better luck next time.'], 401);
       }
       break;
 
     case 'cancel':
       if ($fields['dates'][$shift_date]['assign_id'] === $user_id) {
         $fields['dates'][$shift_date]['assign_id'] = 0;
-        update_shift_stats();
+        update_shift_stats($user_id);
         $next_action = 'sign-up';
         $success_msg = 'You have canceled a shift.';
       }
@@ -263,7 +190,7 @@ function handle_shift_action() {
       if ($finished === true && $fields['dates'][$shift_date]['assign_id'] === $user_id) {
         $fields['dates'][$shift_date]['done'] = true;
         $fields['dates'][$shift_date]['signature'] = '';
-        update_shift_stats();
+        update_shift_stats($user_id);
         $next_action = 'done';
         $success_msg = 'You have finished a shift. Awesome, thank you!';
       }

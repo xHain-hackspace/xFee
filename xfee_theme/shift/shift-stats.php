@@ -16,7 +16,9 @@
  * @since 0.9.0
  */
 add_action('save_post_shift', 'update_shift_stats', 20, 3);
-function update_shift_stats() {
+function update_shift_stats($user_id = false) {
+  $user_shift_count = 0;
+
   $current_shifts = [
     'open'     => 0,
     'assigned' => 0,
@@ -57,10 +59,20 @@ function update_shift_stats() {
           $current_shifts['open']++;
         }
       }
+
+      // Get user shift count
+      if ($user_id !== false && $user_id === $date['assign_id']) {
+        $user_shift_count++;
+      }
     }
   }
 
   update_option('shift_stats', $current_shifts, false);
+
+  // Update user shift count
+  if ($user_id !== false) {
+    update_user_shift_count($user_id, $user_shift_count);
+  }
 }
 
 /**

@@ -13,8 +13,8 @@
  **/
 
 get_header();
-$shifts = get_all_shifts();
 
+$shifts = get_all_shifts();
 $shift_stats = get_shift_stats();
 ?>
 

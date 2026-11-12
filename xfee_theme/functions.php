@@ -32,17 +32,17 @@ $GLOBALS['xfee_config'] = [
     'max_acorn_per_shift' => 4,
     // Maximum how much to earn in one shift
 
-    'max_shift_per_user' => 0,
-    // Maximum amount of shifts a user can sign-up for, not yet in use !
+    'max_shift_per_user' => 4,
+    // Maximum amount of shifts a user can sign-up for
 
     'shifts_for_weeks' => 6,
-    // How many weeks long is the shift overview
+    // How many weeks are shown in the shift overview
 
     'cancel_after_start_min' => 15,
-    // How long after shift start can a shift be canceled
+    // How long after shift-start can a shift be canceled
 
     'finish_before_end_min' => 10,
-    // How early before shift end can a shift be finished
+    // How early before shift-end can a shift be finished
 
     'level_down_md' => 2,
     // Parsing markdown fields also levels down the headlines, e.g. h1 to h3

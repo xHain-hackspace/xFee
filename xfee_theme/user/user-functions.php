@@ -14,7 +14,7 @@
  *
  * @param integer $user_id
  * @param string $field
- * @return mixed Chosen field // TODO: Check if mixed is correct
+ * @return mixed Chosen field
  * @since 0.9.0
  */
 function get_user_field($user_id, $field) {
@@ -87,6 +87,47 @@ function update_user_pick_ups($user_id, $user_pick_ups) {
 }
 
 /**
+ * Returns user shift count field
+ *
+ * @param integer $user_id
+ * @return integer Quantity of signed shifts
+ * @since 0.9.2
+ */
+function get_user_shift_count($user_id) {
+  $user_shift_count = get_user_meta($user_id, 'user_shift_count', true);
+  if (!is_numeric($user_shift_count)) $user_shift_count = 0;
+  return $user_shift_count;
+}
+
+/**
+ * Updates user shift count field
+ *
+ * @param integer $user_id
+ * @param integer $user_shift_count Quantity of signed shifts
+ * @return void
+ * @since 0.9.2
+ */
+function update_user_shift_count($user_id, $user_shift_count) {
+  if (!is_numeric($user_shift_count)) $user_shift_count = 0;
+  update_user_meta($user_id, 'user_shift_count', $user_shift_count);
+}
+
+/**
+ * Returns false, if the shift limit is reached
+ *
+ * @param integer $user_id
+ * @return bool
+ * @since 0.9.2
+ */
+function user_has_shifts_left($user_id) {
+  $user_shift_count = get_user_shift_count($user_id);
+  if ($user_shift_count >= $GLOBALS['xfee_config']['max_shift_per_user']) {
+    return false;
+  }
+  return true;
+}
+
+/**
  * Returns an array with all shifts, can be filtered by $user_id
  *
  * @param integer $user_id optional
@@ -96,7 +137,7 @@ function update_user_pick_ups($user_id, $user_pick_ups) {
 function get_user_shifts($user_id) {
   $user_shifts = [];
 
-  $shifts = get_posts(array(
+  $all_shifts = get_posts(array(
     'post_type'      => 'shift',
     'fields'         => 'ids',
     'posts_per_page' => -1,
@@ -104,7 +145,7 @@ function get_user_shifts($user_id) {
     'order'          => 'ASC',
   ));
 
-  foreach ($shifts as $shift_id) {
+  foreach ($all_shifts as $shift_id) {
 
     $shift_fields = get_shift_fields($shift_id);
     foreach ($shift_fields['dates'] as $key => $field) { // Check all occurrences
@@ -159,7 +200,7 @@ function get_user_shifts($user_id) {
  * @since 0.9.0
  */
 function user_has_shifts($user_id, $all_shifts) {
-  foreach ($all_shifts as $key => $shift) {
+  foreach ($all_shifts as $shift) {
     if ($shift['assign_id'] === $user_id) return true;
   }
   return false;

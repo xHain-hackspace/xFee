@@ -294,6 +294,7 @@ nav {
   background: black;
   padding: 0.2rem 0.6rem;
   border-radius: 0.3rem;
+  z-index: 10000;
   transition: opacity 0.3s linear;
 
   &.hidden {
