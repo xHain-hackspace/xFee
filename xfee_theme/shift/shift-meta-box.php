@@ -99,7 +99,7 @@ function shift_meta_box_form($post) {
     </div>
     <p>Add new:</p>
     <input type="date" id="add_new_shift_date" class="wide_column">
-    <button type="button" id="add_new_shift" data-date="<?php echo $current_key; ?>">+</button>
+    <button type="button" id="add_new_shift" data-last_date="<?php echo $current_key; ?>">+</button>
   </div>
 <?php
 }

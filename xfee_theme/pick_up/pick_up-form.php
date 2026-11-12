@@ -28,6 +28,10 @@ function get_pick_up_action_form($action) {
     $user_name  = get_user_field($user_id, 'user_login');
   }
 
+  if ($user_name === false) {
+    $action = 'wrong code';
+  }
+
   $user_pick_ups = get_user_pick_ups($user_id);
   $pick_up = [];
   foreach ($user_pick_ups as $user_pick_up) {
@@ -46,13 +50,13 @@ function get_pick_up_action_form($action) {
 
     <?php if ($action === 'get pick-up') { ?>
 
-      <input type="number" name="code" value="" placeholder="code">
+      <input type="number" name="code" value="" min="0" step="1" placeholder="code">
       <button type="submit" name="pick_up_action" value="get pick-up"></button>
 
     <?php } else if ($action === 'wrong code') { ?>
 
       <div id="ready_for_pick_up">Code does not match.</div>
-      <input type="number" name="code" value="" placeholder="code">
+      <input type="number" name="code" value="" min="0" step="1" placeholder="code">
       <button type="submit" name="pick_up_action" value="get pick-up"></button>
 
     <?php } else if ($action === 'confirm pick-up') { ?>

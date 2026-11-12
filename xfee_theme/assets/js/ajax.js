@@ -3,13 +3,11 @@
  *
  * @package xfee
  * @author Richard Lemke <richard@mrhide.de>
- * @since 0.9.0
  */
 
 /**
  * Handles shift form ajax call
  *
- * @author Richard Lemke <richard@mrhide.de>
  * @since 0.9.0
  */
 document.addEventListener('submit', async function (event) {
@@ -32,7 +30,6 @@ document.addEventListener('submit', async function (event) {
     submit_btn.disabled = true;
   }
 
-  // View Transition mit Fallback
   function updateWithTransition(callback) {
     if (typeof wrapper.startViewTransition === 'function') {
       wrapper.startViewTransition(callback);
@@ -55,37 +52,30 @@ document.addEventListener('submit', async function (event) {
       result = JSON.parse(responseText);
     } catch (error) {
       console.log('error', error);
-      throw new Error('WordPress liefert kein gültiges JSON. Siehe Console.');
+      throw new Error('WordPress does not return valid JSON.');
     }
 
     if (!response.ok || !result.success) {
-      throw new Error(result.data?.message || 'Beim Absenden ist ein Fehler aufgetreten.');
+      throw new Error(result.data?.message || 'An error occurred while submitting.');
     }
 
     updateWithTransition(() => {
-      let hidden_action = form.querySelector('input[name="shift_booking_action"]');
-      hidden_action.value = result.data.next_action;
-      submit_btn.dataset.value = result.data.next_action;
+      // let hidden_action = form.querySelector('input[name="shift_booking_action"]');
+      set_feedback(result.data.message);
       if (result.data.next_action === 'done') {
+        wrapper.dataset.assigned = 'booked';
         wrapper.dataset.status = 'done';
         set_shift_stats(0, 1);
       } else {
+        wrapper.dataset.status = 'pre_process';
         wrapper.dataset.assigned = result.data.next_action === 'cancel' ? 'booked' : 'unassigned';
         set_shift_stats(result.data.next_action === 'cancel' ? 1 : -1);
       }
     });
   } catch (error) {
-    // Formular bleibt bei Fehlern erhalten
+    console.log('error', error);
     updateWithTransition(() => {
-      let feedback = form.querySelector('.form-feedback');
-
-      if (!feedback) {
-        feedback = document.createElement('div');
-        feedback.className = 'form-feedback';
-        form.appendChild(feedback);
-      }
-
-      feedback.textContent = error.message;
+      set_feedback(error.message);
     });
   }
   form.dataset.submitting = 'false';
@@ -93,12 +83,35 @@ document.addEventListener('submit', async function (event) {
   if (submit_btn) {
     submit_btn.disabled = false;
   }
+  set_shift_form(wrapper);
 });
 
 /**
- * @package xfee
+ * Sets feedback message for ajax
+ *
  * @param {number} value -
  * @returns {string}
+ * @since 0.9.1
+ */
+function set_feedback(message) {
+  const feedback = document.getElementById('form_feedback');
+  feedback.querySelectorAll('div').forEach((m) => m.remove());
+  feedback.classList.remove('hidden');
+
+  let msg_item = document.createElement('div');
+  msg_item.textContent = message;
+  feedback.appendChild(msg_item);
+
+  setTimeout(function () {
+    feedback.classList.add('hidden');
+  }, 5000);
+}
+
+/**
+ *
+ * @param {number} value -
+ * @returns {string}
+ * @since 0.9.0
  */
 function escapeHTML(value) {
   const element = document.createElement('div');
@@ -108,11 +121,14 @@ function escapeHTML(value) {
 
 /**
  * Changes the shift stats without oage-load
+ *
  * @param {number} signed_delta - The difference in assigned shift count
+ * @since 0.9.0
  */
 function set_shift_stats(signed_delta, done = 0) {
   const stat_open = document.querySelector('#site_stats .open');
   const stat_assigned = document.querySelector('#site_stats .assigned');
+  if (stat_assigned === null || stat_open === null) return;
   let value_open = parseInt(stat_open.getAttribute('value'));
   let value_assigned = parseInt(stat_assigned.getAttribute('value'));
   stat_open.setAttribute('value', value_open - signed_delta);

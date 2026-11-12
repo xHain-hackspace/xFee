@@ -36,15 +36,15 @@ function get_shift_action_form(array $args) {
   ob_start();
 ?>
 
-  <!-- action="<?php echo esc_url(admin_url('admin-post.php')); ?>"  -->
   <form method="post"
     data-ajax_url="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"
     class="sign_up" data-assigned="<?php echo $args['assigned']; ?>" data-status="<?php echo $args['status']; ?>">
-
-    <input type="hidden" name="action" value="handle_shift_action">
+    <?php // TODO: Remove data-assigned and data-status, check js and css first
+    ?>
 
     <?php wp_nonce_field('shift_booking', 'shift_booking_nonce'); ?>
 
+    <input type="hidden" name="action" value="handle_shift_action">
     <input type="hidden" name="shift_id" value="<?php echo esc_attr($args['id']); ?>">
     <input type="hidden" name="shift_date" value="<?php echo esc_attr($args['date']); ?>">
     <input type="hidden" name="compensation" value="<?php echo esc_attr($args['compensation']); ?>">
@@ -52,31 +52,47 @@ function get_shift_action_form(array $args) {
     <input type="hidden" name="done" value="<?php echo esc_attr($args['done']); ?>">
     <input type="hidden" name="signature" value="<?php echo esc_attr($args['signature']); ?>">
 
+    <input type="hidden" data-condition="form_sign" name="shift_booking_action" value="sign-up">
+    <button type="submit" data-condition="form_sign" aria-label="sign-up"></button>
+
+    <input type="hidden" data-condition="form_sign_urgent" name="shift_booking_action" value="sign-up" disabled>
+    <button type="submit" data-condition="form_sign_urgent" aria-label="sign-up" disabled></button>
+
+    <input type="hidden" data-condition="form_cancel" name="shift_booking_action" value="cancel" disabled>
+    <button type="submit" data-condition="form_cancel" aria-label="cancel" disabled></button>
+
+    <input type="hidden" data-condition="form_finish" name="shift_booking_action" value="finish" disabled>
+    <button type="submit" data-condition="form_finish" aria-label="finish" disabled></button>
+
+    <button class="done" data-condition="form_assigned" aria-label="assigned" disabled></button>
+
+    <button class="done" data-condition="form_running" aria-label="running" disabled></button>
+
+    <button class="done success" data-condition="form_done" aria-label="done" disabled></button>
+
+    <button class="done failed" data-condition="form_failed" aria-label="was not done" disabled></button>
+
     <?php if ($args['assigned'] === 'booked') { ?>
 
       <?php if ($args['status'] === 'pre_process' || $args['status'] === 'queue_process' || $args['status'] === 'begin_process') {
         // TODO: Too many stati
       ?>
 
-        <div class="acorn_sign"><?php echo $args['compensation']; ?> <span class="acorn_icon"></span></div>
-        <input type="hidden" name="shift_booking_action" value="cancel">
-        <button type="submit" data-value="cancel"></button>
+        <!-- <input type="hidden" name="shift_booking_action" value="cancel">
+        <button type="submit" data-value="cancel"></button> -->
 
       <?php } else if ($args['status'] === 'end_process' || $args['status'] === 'post_process') { ?>
 
-        <input type="hidden" name="shift_booking_action" value="finish">
-        <div class="acorn_sign"><?php echo $args['compensation']; ?> <span class="acorn_icon"></span></div>
-        <button type="submit" data-value="finish"></button>
+        <!-- <input type="hidden" name="shift_booking_action" value="finish">
+        <button type="submit" data-value="finish"></button> -->
 
       <?php } else if ($args['status'] === 'done') { ?>
 
-        <button class="done success">
-          <div class="acorn_sign"><?php echo $args['compensation']; ?> <span class="acorn_icon"></span></div>
-        </button>
+        <!-- <button class="done success"></button> -->
 
       <?php } else { ?>
 
-        <button class="done">running</button>
+        <!-- <button class="done">running</button> -->
 
       <?php } ?>
 
@@ -84,11 +100,11 @@ function get_shift_action_form(array $args) {
 
       <?php if ($args['status'] === 'done') { ?>
 
-        <button class="done success">done</button>
+        <!-- <button class="done success">done</button> -->
 
       <?php } else { ?>
 
-        <button class="done">assigned</button>
+        <!-- <button class="done">assigned</button> -->
 
       <?php } ?>
 
@@ -96,25 +112,33 @@ function get_shift_action_form(array $args) {
 
       <?php if ($args['status'] === 'pre_process') { ?>
 
-        <div class="acorn_sign"><?php echo $args['compensation']; ?> <span class="acorn_icon"></span></div>
-        <input type="hidden" name="shift_booking_action" value="sign-up">
-        <button type="submit" data-value="sign-up"></button>
+        <!-- <input type="hidden" name="shift_booking_action" value="sign-up">
+        <button type="submit" data-value="sign-up"></button> -->
 
       <?php } else if ($args['status'] === 'queue_process' || $args['status'] === 'begin_process') { ?>
 
-        <div class="acorn_sign"><?php echo $args['compensation']; ?> <span class="acorn_icon"></span></div>
-        <input type="hidden" name="shift_booking_action" value="sign-up">
-        <button type="submit" data-value="sign-up !!!"></button>
+        <!-- <input type="hidden" name="shift_booking_action" value="sign-up">
+        <button type="submit" data-value="sign-up !!!"></button> -->
 
       <?php } else { ?>
 
-        <button class="done failed">wasn't done</button>
+        <!-- <button class="done failed">wasn't done</button> -->
       <?php } ?>
 
     <?php } else {
       error_log('Shift-form error: $assigned does not match.');
     } ?>
 
+    <?php
+    // if ($shifts[$key]['assigned'] != 'assigned') {
+    //   $like_now        = date('Y-m-d H:i');
+    //   $timestamp_begin = $shifts[$key]['date'] . ' ' . $shifts[$key]['time_from'];
+    //   $timestamp_end   = $shifts[$key]['date'] . ' ' . $shifts[$key]['time_to'];
+    //   if ($like_now <= $timestamp_end) {
+    //     echo render_countdown($timestamp_begin, $timestamp_end);
+    //   }
+    // }
+    ?>
   </form>
 
 <?php
@@ -138,6 +162,9 @@ function handle_shift_action() {
     ], 401);
   }
 
+  $success_msg = 'Thank you very much! Your request has been submitted.';
+
+  // Field check
   $required_fields = [
     'shift_booking_action',
     'shift_id',
@@ -145,27 +172,28 @@ function handle_shift_action() {
     'signature',
     'shift_booking_nonce'
   ];
-
   foreach ($required_fields as $field) {
     if (!isset($_POST[$field]) || $_POST[$field] === '') {
       wp_send_json_error([
-        'message' => 'Missing field: ' . $field
+        'message' => 'Something went wrong, missing the field ' . $field . '.'
       ], 400);
     }
   }
 
   $action = sanitize_text_field(wp_unslash($_POST['shift_booking_action']));
   if (!in_array($action, ['sign-up', 'cancel', 'finish', 'done'], true)) {
-    return;
+    wp_send_json_error([
+      'message' => 'Something went wrong, action did not match.'
+    ], 401);
   }
 
   if (!wp_verify_nonce(
-    sanitize_text_field(
-      wp_unslash($_POST['shift_booking_nonce'])
-    ),
+    sanitize_text_field(wp_unslash($_POST['shift_booking_nonce'])),
     'shift_booking'
   )) {
-    wp_die('Invalid request.');
+    wp_send_json_error([
+      'message' => 'Something went wrong, it did not pass the test.'
+    ], 401);
   }
   $shift_id     = absint($_POST['shift_id']);
   $shift_date   = sanitize_text_field(wp_unslash($_POST['shift_date']));
@@ -178,22 +206,30 @@ function handle_shift_action() {
     || get_post_type($shift_id) !== 'shift'
     || get_post_status($shift_id) !== 'publish'
   ) {
-    wp_die('Couldn\'t find shift.');
+    wp_send_json_error([
+      'message' => 'Something went wrong, could not find a shift with the ID ' . $shift_id . '.'
+    ], 401);
   }
 
   $fields = get_post_meta($shift_id, 'shift_fields', true);
   // Check for occurrences
   if (!is_array($fields['dates']) || !array_key_exists($shift_date, $fields['dates'])) {
-    error_log('xFee-Theme: Couldn\'t find shift occurrence. $shift_date: ' . $shift_date);
+    wp_send_json_error([
+      'message' => 'Something went wrong, could not find a shift occurrence for ' . $shift_date . '.'
+    ], 401);
   }
   // Compare to date
   if ($fields['dates'][$shift_date]['date'] !== $shift_date) {
-    error_log('xFee-Theme: Couldn\'t find shift occurrence. (date match error)');
+    wp_send_json_error([
+      'message' => 'Something went wrong, could not find a shift occurrence for ' . $shift_date . '.'
+    ], 401);
   }
 
   // Compare to signature
   if ($fields['dates'][$shift_date]['signature'] !== $signature) {
-    error_log('xFee-Theme: Couldn\'t find shift occurrence. (signature match error: ' . $fields['dates'][$shift_date]['signature'] . ' != ' . $signature . ')');
+    wp_send_json_error([
+      'message' => 'Something went wrong, the signatures did not match.'
+    ], 401);
   }
 
   $user_id = get_current_user_id();
@@ -205,6 +241,11 @@ function handle_shift_action() {
         $fields['dates'][$shift_date]['assign_id'] = $user_id;
         update_shift_stats();
         $next_action = 'cancel';
+        $success_msg = 'You have signed a shift.';
+      } else {
+        wp_send_json_error([
+          'message' => 'Shift is already assigned, you were probably a bit too slow, better luck next time.'
+        ], 401);
       }
       break;
 
@@ -213,6 +254,7 @@ function handle_shift_action() {
         $fields['dates'][$shift_date]['assign_id'] = 0;
         update_shift_stats();
         $next_action = 'sign-up';
+        $success_msg = 'You have canceled a shift.';
       }
       break;
 
@@ -223,6 +265,7 @@ function handle_shift_action() {
         $fields['dates'][$shift_date]['signature'] = '';
         update_shift_stats();
         $next_action = 'done';
+        $success_msg = 'You have finished a shift. Awesome, thank you!';
       }
       break;
   }
@@ -231,7 +274,7 @@ function handle_shift_action() {
   update_shift_stats();
 
   wp_send_json_success([
-    'message' => 'Vielen Dank! Deine Anfrage wurde übermittelt.',
+    'message' => $success_msg,
     'next_action' => $next_action
   ]);
 }

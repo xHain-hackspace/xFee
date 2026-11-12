@@ -32,11 +32,9 @@ Development:
 ./docker/build.sh
 ```
 
-1. Install
-1. Activate
-1. Use
+TODO: Reverse proxy setup, Authentik setup
 
-Install the theme on a clean WordPress. Upon activation xFee creates all the necessary pages and preferences 🧚
+Finish the WordPress installation and activate the theme. xFee creates all the necessary pages and preferences 🧚
 
 ## User roles
 
@@ -51,7 +49,6 @@ Install the theme on a clean WordPress. Upon activation xFee creates all the nec
 - Clean-up css
 - Refactor JS (Mayve move to modules, like countdown to shift)
 - Shrink WP (Remove media-upload, plugins, ...)
-- Dockerfication (Clean WP, parsedown, xFee-Theme)
 - Limit user shift sign-ups (use global max shift option)
 - Cancel goodie option
 - Allow admins to finish a shift
@@ -236,3 +233,22 @@ Via get_pick_up_trash()
   'code' => 0,
 ]
 ```
+
+### Shift status flag
+
+The status flag reflects the phase in time of a shift. It doesn't reflect the state of assignment, that's what the assigned flag is for.
+
+- pre_process: Shift is ready for sign-up
+- queue_process: Still ready for sign-up on the same day (urgent)
+- begin_process: Shift has started, can still be canceled
+- end_process: Shift is running, can be finished
+- post_process: Shift has ended, needs to be finished (transfer of acorn)
+- done: Shift is finished and ready for deletion
+
+### Shift assigned flag
+
+The assigned flag reflects only if the shift is assigned. If the shift is in the future or in the past is shown by the status flag.
+
+- unassigned: Shift is not assigned
+- assigned: Shift is assigned, hurray!
+- booked: Shift is assign to current user

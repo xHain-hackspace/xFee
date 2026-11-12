@@ -38,10 +38,10 @@ get_header(); ?>
     <h2>Your current shifts</h2>
     <div class="user_shift_table">
       <?php
+      $counter = 0;
       if (count($user_shifts) > 0) {
       ?>
         <?php
-        $counter = 0;
         foreach ($user_shifts as $key => $shift) {
           if ($shift['done'] === true) {
             continue;
@@ -67,13 +67,9 @@ get_header(); ?>
           </div>
         <?php
         }
-        if ($counter === 0) {
-        }
-        echo $counter;
+      }
+      if ($counter === 0) {
         ?>
-      <?php
-      } else {
-      ?>
         <span>You have no shifts</span>
       <?php
       }

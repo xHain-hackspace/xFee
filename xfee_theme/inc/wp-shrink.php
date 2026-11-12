@@ -135,4 +135,4 @@ function xfee_disable_rest_media_uploads($result, $server, $request) {
   return $result;
 }
 
-add_filter('rest_pre_dispatch', 'xfee_disable_rest_media_uploads', 10, 3);  z
+add_filter('rest_pre_dispatch', 'xfee_disable_rest_media_uploads', 10, 3);

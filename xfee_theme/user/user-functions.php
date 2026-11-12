@@ -19,6 +19,7 @@
  */
 function get_user_field($user_id, $field) {
   $user = get_user_by('id', $user_id);
+  if ($user === false) return false;
   return $user->data->$field;
 }
 

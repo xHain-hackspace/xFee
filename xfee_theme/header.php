@@ -24,6 +24,9 @@
 
 <body <?php body_class(); ?> id="top">
 
+  <!-- FORM FEEDBACK -->
+  <div id="form_feedback"></div>
+
   <!-- HEADER -->
   <header>
     <a id="page_title" href="<?php echo get_home_url(); ?>">

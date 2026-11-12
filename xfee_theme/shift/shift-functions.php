@@ -158,7 +158,7 @@ function get_shift_status(array $args) {
     }
   }
 
-  // Set status // TODO: Change to switch
+  // Set status // TODO: Change to switch, or use early returns
   $today = date('Y-m-d');
   if ($args['done'] === true) {
     $status = 'done';
@@ -269,13 +269,15 @@ function shift_remove_old_ones($shifts) {
 function render_countdown($datetime, $datetime_end) {
   $target = DateTimeImmutable::createFromFormat(
     '!Y-m-d H:i',
-    $datetime,
-    wp_timezone()
+    $datetime
+    // ,
+    // wp_timezone()
   );
   $end = DateTimeImmutable::createFromFormat(
     '!Y-m-d H:i',
-    $datetime_end,
-    wp_timezone()
+    $datetime_end
+    // ,
+    // wp_timezone()
   );
 
   $errors = DateTimeImmutable::getLastErrors();

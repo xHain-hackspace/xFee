@@ -44,7 +44,6 @@ function add_new_shift(e, date) {
 function remove_shift_occurrence(e) {
   const date = e.getAttribute('data-date');
   const assignee = jQuery('select[data-date="' + date + '"]').val();
-  console.log('assignee', assignee);
   if (assignee != '' && assignee != 'unassigned' && assignee != 0) {
     if (confirm('Delete assigned shift?') != true) return;
   }
@@ -54,22 +53,21 @@ function remove_shift_occurrence(e) {
 // Add Shifts automatically
 
 jQuery('#add_new_shift_day').click(function () {
-  let date = jQuery('#add_new_shift').attr('data-date');
-  console.log('date', date);
+  let date = jQuery('#add_new_shift').attr('data-last_date');
   if (date == '') return;
   date = add_days(date, 1);
   add_new_shift(false, date);
 });
 
 jQuery('#add_new_shift_week').click(function () {
-  let date = jQuery('#add_new_shift').attr('data-date');
+  let date = jQuery('#add_new_shift').attr('data-last_date');
   if (date == '') return;
   date = add_days(date, 7);
   add_new_shift(false, date);
 });
 
 jQuery('#add_new_shift_month').click(function () {
-  let date = jQuery('#add_new_shift').attr('data-date');
+  let date = jQuery('#add_new_shift').attr('data-last_date');
   if (date == '') return;
   date = next_monthly_event(date);
   if (date == null) {

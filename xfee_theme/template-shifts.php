@@ -66,7 +66,8 @@ $shift_stats = get_shift_stats();
 
         <h2><?php echo $shifts[$key]['name']; ?><?php echo get_editor_link($shifts[$key]['id']); ?></h2>
 
-        <div class="action_form_wrap" data-assigned="<?php echo $shifts[$key]['assigned']; ?>">
+        <div class="action_form_wrap" data-assigned="<?php echo $shifts[$key]['assigned']; ?>" data-status="<?php echo $shifts[$key]['status']; ?>">
+          <div class="acorn_sign"><?php echo $shifts[$key]['compensation']; ?> <span class="acorn_icon"></span></div>
           <?php
           echo get_shift_action_form(
             [
@@ -81,12 +82,9 @@ $shift_stats = get_shift_stats();
             ]
           );
           if ($shifts[$key]['assigned'] != 'assigned') {
-            $like_now        = date('Y-m-d H:i');
             $timestamp_begin = $shifts[$key]['date'] . ' ' . $shifts[$key]['time_from'];
             $timestamp_end   = $shifts[$key]['date'] . ' ' . $shifts[$key]['time_to'];
-            if ($like_now <= $timestamp_end) {
-              echo render_countdown($timestamp_begin, $timestamp_end);
-            }
+            echo render_countdown($timestamp_begin, $timestamp_end);
           }
           ?>
         </div>
