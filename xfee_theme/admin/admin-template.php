@@ -27,7 +27,7 @@
 
 // DELETE GOODIE PICK-UPS
 // $goodie_id = 61;
-// $goodie_fields = get_post_meta($goodie_id, 'goodie_fields', true);
+// $goodie_fields = get_goodie_fields($goodie_id);
 // $goodie_fields['pick_ups'] = [];
 // update_post_meta($goodie_id, 'goodie_fields', $goodie_fields);
 ?>

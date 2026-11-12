@@ -309,7 +309,7 @@ class xFee_Admin {
     $code           = $user_pick_ups[$index]['code'];
 
     // Remove pick-up from goodie
-    $goodie_fields = get_post_meta($goodie_id, 'goodie_fields', true) ?? [];
+    $goodie_fields = get_goodie_fields($goodie_id);
     $removed = false;
     foreach ($goodie_fields['pick_ups'] as $key => $pick_up) {
       if ($pick_up['user_id'] === $user_id && $pick_up['reserve'] === $reserve) {

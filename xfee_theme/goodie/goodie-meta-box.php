@@ -112,7 +112,7 @@ function goodie_save_meta($post_id, $post) {
  * @since 0.9.0
  */
 function get_goodie_meta($goodie_id) {
-  $fields = get_post_meta($goodie_id, 'goodie_fields', true);
+  $fields = get_goodie_fields($goodie_id);
   if (!is_array($fields)) $fields = [];
   $fields['name']             = $fields['name'] ?? '';
   $fields['in_stock']         = $fields['in_stock'] ?? 0;
