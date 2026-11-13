@@ -549,6 +549,14 @@ button[data-detail-id] {
       } */
     }
 
+    &[data-assigned='unassigned'] {
+      &[data-status='begin_process'] {
+        button[type='submit'] {
+          animation: pulsing 1.6s ease 0s infinite;
+        }
+      }
+    }
+
     &[data-status='queue_process'] {
       button[type='submit'] {
         animation: pulsing 1.6s ease 0s infinite;

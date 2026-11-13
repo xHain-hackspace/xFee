@@ -107,10 +107,10 @@ set_shift_form();
  * @since 0.9.0
  */
 function updateCountdowns() {
-  document.querySelectorAll('.countdown').forEach(function (element) {
+  document.querySelectorAll('.countdown').forEach(function (countdown) {
     // Convert the target Unix timestamp from seconds to milliseconds.
-    const target = Number(element.dataset.target) * 1000;
-    const end = Number(element.dataset.end) * 1000;
+    const target = Number(countdown.dataset.target) * 1000;
+    const end = Number(countdown.dataset.end) * 1000;
     let text = 'starts in ';
 
     // Calculate the remaining time in seconds.
@@ -121,44 +121,42 @@ function updateCountdowns() {
       remaining = Math.floor((end - Date.now()) / 1000);
       text = 'ends in ';
     }
-
     if (remaining <= 0) {
-      element.textContent = 'has ended';
+      remove_countdown(countdown);
       return;
     }
 
     // Calculate the remaining days, hours, minutes, and seconds.
     const days = Math.floor(remaining / 86400);
     remaining %= 86400;
-
     const hours = Math.floor(remaining / 3600);
     remaining %= 3600;
-
     const minutes = Math.floor(remaining / 60);
-
     const seconds = remaining % 60;
 
     // Build the countdown text with correct singular and plural forms.
     const parts = [];
+    if (days > 0) parts.push(days + 'd');
+    if (hours > 0) parts.push(hours + 'h');
+    if (minutes > 0) parts.push(minutes + 'min');
+    if (minutes < 5 && seconds > 0) parts.push(seconds + 's');
 
-    if (days > 0) {
-      parts.push(days + 'd');
-    }
-    if (hours > 0) {
-      parts.push(hours + 'h');
-    }
-    if (minutes > 0) {
-      parts.push(minutes + 'min');
-    }
-    if (parts.length === 0 && seconds > 0) {
-      parts.push(seconds + 's');
-    }
-
-    // Update the element with the formatted countdown.
-    element.textContent = text + parts.join(' ');
+    // Update the countdown with the formatted countdown.
+    if (parts.length != 0) countdown.textContent = text + parts.join(' ');
   });
 }
 
 // Init countdown
 updateCountdowns();
 setInterval(updateCountdowns, 1000);
+
+/**
+ * Updates form after countdown has finished
+ *
+ * @since 0.9.2
+ */
+function remove_countdown(countdown) {
+  countdown.parentElement.dataset.status = 'done';
+  set_shift_form(countdown.parentElement);
+  countdown.remove();
+}

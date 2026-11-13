@@ -38,7 +38,8 @@ function get_shift_action_form(array $args) {
 
   <form method="post"
     data-ajax_url="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"
-    class="sign_up" data-assigned="<?php echo $args['assigned']; ?>" data-status="<?php echo $args['status']; ?>">
+    class="sign_up">
+    <!-- data-assigned="<?php echo $args['assigned']; ?>" data-status="<?php echo $args['status']; ?>" -->
     <?php // TODO: Remove data-assigned and data-status, check js and css first
     ?>
 
@@ -163,7 +164,7 @@ function handle_shift_action() {
   switch ($action) {
     case 'sign-up':
       if ($fields['dates'][$shift_date]['assign_id'] === 0) {
-        if (!user_has_shifts_left($user_id)) {
+        if (user_has_shifts_left($user_id) === false) {
           wp_send_json_error(['message' => 'Your shift maximum is reached, finish a shift before you sign-up for a new one.'], 401);
         } else {
           $fields['dates'][$shift_date]['assign_id'] = $user_id;

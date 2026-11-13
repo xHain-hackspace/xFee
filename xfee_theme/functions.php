@@ -32,7 +32,7 @@ $GLOBALS['xfee_config'] = [
     'max_acorn_per_shift' => 4,
     // Maximum how much to earn in one shift
 
-    'max_shift_per_user' => 4,
+    'max_shift_per_user' => 6,
     // Maximum amount of shifts a user can sign-up for
 
     'shifts_for_weeks' => 6,

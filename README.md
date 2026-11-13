@@ -13,7 +13,7 @@ Use-case:
 
 ## Features
 
-- Shift sign-up
+- Shift sign-up with countdown
 - Goodie shop with pick-up functions
 - Minimal data collection & self cleaning
 - Cancel & undo functions
@@ -50,7 +50,6 @@ Finish the WordPress installation and activate the theme. xFee creates all the n
 - Clean-up css
 - Refactor JS (Mayve move to modules, like countdown to shift)
 - Shrink WP (Remove media-upload, plugins, ...)
-- Limit user shift sign-ups (use global max shift option)
 - Cancel goodie option
 - Allow admins to finish a shift
 - Access hardening
