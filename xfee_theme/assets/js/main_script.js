@@ -45,7 +45,8 @@ function toggle_tab(e) {
  * @since 0.9.2
  */
 function set_shift_form(form = false) {
-  // per element or all
+  console.log('set_shift_form', form);
+  // one form or all
   let forms;
   if (form !== false) {
     // one form

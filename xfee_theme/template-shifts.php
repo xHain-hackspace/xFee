@@ -67,6 +67,7 @@ $shift_stats = get_shift_stats();
         <h2><?php echo $shifts[$key]['name']; ?><?php echo get_editor_link($shifts[$key]['id']); ?></h2>
 
         <div class="action_form_wrap" data-assigned="<?php echo $shifts[$key]['assigned']; ?>" data-status="<?php echo $shifts[$key]['status']; ?>">
+
           <div class="acorn_sign"><?php echo $shifts[$key]['compensation']; ?> <span class="acorn_icon"></span></div>
           <?php
           echo get_shift_action_form(

@@ -51,7 +51,7 @@ get_header(); ?>
           <div><?php echo $shift['weekday']; ?> <?php echo $shift['date']; ?></div>
           <div><?php echo $shift['time_from'] . ' - ' . $shift['time_to']; ?></div>
           <div><?php echo $shift['name']; ?></div>
-          <div class="action_form_wrap" data-assigned="<?php echo $shift['assigned']; ?>">
+          <div class="action_form_wrap" data-assigned="<?php echo $shift['assigned']; ?>" data-status="<?php echo $shift['status']; ?>">
             <?php echo get_shift_action_form(
               [
                 'id'            => $shift['id'],
