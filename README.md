@@ -46,7 +46,6 @@ Finish the WordPress installation and activate the theme. xFee creates all the n
 ## TODOs
 
 - Debug and error handling (use global debug option)
-- Make responsive
 - Clean-up css
 - Refactor JS (Mayve move to modules, like countdown to shift)
 - Shrink WP (Remove media-upload, plugins, ...)

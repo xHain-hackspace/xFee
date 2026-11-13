@@ -446,3 +446,37 @@ button {
     }
   }
 }
+
+/* ###### RESPONSIVE ##### */
+
+@media only screen and (max-width: 782px) {
+  #wp-admin-bar-root-default,
+  #minor-publishing-actions {
+    display: block;
+
+    #wp-admin-bar-wp-logo,
+    #wp-admin-bar-site-name,
+    #wp-admin-bar-command-palette,
+    #wp-admin-bar-comments,
+    #wp-admin-bar-new-content {
+      display: none !important;
+    }
+  }
+
+  #admin_pick_up_list {
+    & #ready_for_pick_up {
+      line-height: 1;
+    }
+  }
+
+  #admin_user_list_table {
+    grid-template-columns: repeat(6, auto);
+  }
+
+  .xfee_admin_table {
+    & > div,
+    & > span {
+      padding: 0.2rem;
+    }
+  }
+}

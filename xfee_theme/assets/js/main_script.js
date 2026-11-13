@@ -45,7 +45,6 @@ function toggle_tab(e) {
  * @since 0.9.2
  */
 function set_shift_form(form = false) {
-  console.log('set_shift_form', form);
   // one form or all
   let forms;
   if (form !== false) {
@@ -89,7 +88,6 @@ function set_shift_form(form = false) {
  * @since 0.9.2
  */
 function set_form_field(form, field) {
-  console.log('field', field);
   const fields = form.querySelectorAll('[data-condition]');
   for (j = 0; j < fields.length; j++) {
     fields[j].disabled = true;

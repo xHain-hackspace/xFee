@@ -88,7 +88,9 @@ get_header(); ?>
           <div><?php echo $pick_up['goodie_name']; ?></div>
           <div><?php echo $pick_up['option']; ?></div>
           <div>Pick-up code: <?php echo $pick_up['code']; ?></div>
-          <div><?php echo get_cancel_order_form($pick_up['code']); ?></div>
+          <div class="order_form_wrap">
+            <?php echo get_cancel_order_form($pick_up['code']); ?>
+          </div>
         <?php
         }
       } else {
