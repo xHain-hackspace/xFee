@@ -38,12 +38,14 @@ get_header(); ?>
       'label_log_in'   => 'log in',
     ]);
     ?>
-
-    <div class="authentik-login">
-      <a href="<?php echo esc_url(xfee_authentik_login_url()); ?>">
-        Sign in with Authentik
-      </a>
-    </div>
+    <?php if (function_exists('xfee_authentik_login_url')) { ?>
+      <div class="authentik-login">
+        <a href="<?php echo esc_url(xfee_authentik_login_url());
+                  ?>">
+          Sign in with Authentik
+        </a>
+      </div>
+    <?php } ?>
   </div>
 </div>
 
